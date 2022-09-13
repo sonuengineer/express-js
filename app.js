@@ -4,6 +4,8 @@ const adminRoutes=require("./routes/admin.js")
 const app = express();
 const shopRoutes=require("./routes/shop.js")
 const contacRoutes=require("./routes/contact.js")
+let error404=require('./controllers/error')
+
 const path=require("path");
 const { dirname } = require('path');
 
@@ -16,11 +18,11 @@ app.use("/admin",adminRoutes);
 app.use(shopRoutes);
 app.use(contacRoutes)
 
+app.use(error404.err404)
 
-
-app.use( (req, res, next) => {
-  res.sendFile(path.join(__dirname,'views','404.html'));
-});
+// app.use( (req, res, next) => {
+//   res.sendFile(path.join(__dirname,'views','404.html'));
+// });
 
 //const server=http.createServer(app)
 //server.listen(3000)
